@@ -33,7 +33,7 @@ function SellCredit() {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:3000/store/all")
+    fetch("https://pharmacy-erp.onrender.com/store/all")
       .then(res => res.json())
       .then(data => setAllStores(data))
       .catch(err => {
@@ -43,7 +43,7 @@ function SellCredit() {
 
     const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:3000/creditCustomer/all", {
+      .get("https://pharmacy-erp.onrender.com/creditCustomer/all", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -70,7 +70,7 @@ function SellCredit() {
     setFormData(prev => ({ ...prev, productId: "" }));
 
     try {
-      const res = await fetch("http://localhost:3000/product/allBrand");
+      const res = await fetch("https://pharmacy-erp.onrender.com/product/allBrand");
       const data = await res.json();
       const filtered = data.filter(b => b.store?._id === storeId);
       setBrands(filtered);
@@ -89,7 +89,7 @@ function SellCredit() {
 
     try {
       const res = await fetch(
-        `http://localhost:3000/product/byStoreAndBrand?storeId=${selectedStoreId}&brandId=${option.value}`
+        `https://pharmacy-erp.onrender.com/product/byStoreAndBrand?storeId=${selectedStoreId}&brandId=${option.value}`
       );
       const data = await res.json();
 
@@ -124,7 +124,7 @@ function SellCredit() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/creditSell/sell",
+        "https://pharmacy-erp.onrender.com/creditSell/sell",
         {
           productId,
           creditCustomer,

@@ -22,7 +22,7 @@ function ExpiringProducts() {
 
   const fetchStores = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/store/all");
+      const res = await axios.get("https://pharmacy-erp.onrender.com/store/all");
       const options = res.data.map((s) => ({
         value: s._id,
         label: s.name,
@@ -36,7 +36,7 @@ function ExpiringProducts() {
   const fetchData = async (monthRange) => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/product/shortExpiringWithMonth",
+        "https://pharmacy-erp.onrender.com/product/shortExpiringWithMonth",
         {
           params: { month: monthRange },
         }

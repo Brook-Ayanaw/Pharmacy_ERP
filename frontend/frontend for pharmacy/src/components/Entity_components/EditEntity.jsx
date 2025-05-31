@@ -18,7 +18,7 @@ function EditEntity() {
     useEffect(() => {
         const fetchEntities = async () => {
             try {
-                const res = await fetch("http://localhost:3000/entity/all");
+                const res = await fetch("https://pharmacy-erp.onrender.com/entity/all");
                 const data = await res.json();
                 if (res.ok) {
                     setEntities(data);
@@ -39,7 +39,7 @@ function EditEntity() {
         const fetchEntity = async () => {
             setLoading(true);
             try {
-                const res = await fetch(`http://localhost:3000/entity/entityById/${selectedId}`);
+                const res = await fetch(`https://pharmacy-erp.onrender.com/entity/entityById/${selectedId}`);
                 const data = await res.json();
                 if (res.ok) {
                     setFormData({
@@ -81,7 +81,7 @@ function EditEntity() {
         try {
             const token = localStorage.getItem("token");
 
-            const res = await fetch(`http://localhost:3000/entity/edit/${selectedId}`, {
+            const res = await fetch(`https://pharmacy-erp.onrender.com/entity/edit/${selectedId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

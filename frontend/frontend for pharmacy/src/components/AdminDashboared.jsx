@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import ListAllSupplier from './Supplier_components/ListAllSupplier';
 import AddSupplier from './Supplier_components/AddSupplier';
 import EditSupplier from './Supplier_components/EditSupplier';
-import RefillProduct from './refillProduct';
+import RefillProduct from './RefillProduct';
 import SearchByInv from './SearchByInv';
 import Logout from './User_Components/Logout';
 import ListUser from './User_Components/ListUser';

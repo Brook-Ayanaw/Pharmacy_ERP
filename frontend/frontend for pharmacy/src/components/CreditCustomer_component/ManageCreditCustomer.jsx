@@ -10,7 +10,7 @@ function ManageCreditCustomer() {
 
   const fetchCustomers = async () => {
     try {
-      const res = await fetch("http://localhost:3000/creditCustomer/all", {
+      const res = await fetch("https://pharmacy-erp.onrender.com/creditCustomer/all", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -28,7 +28,7 @@ function ManageCreditCustomer() {
 
   const handleToggleStatus = async (id) => {
     try {
-      const res = await fetch(`http://localhost:3000/creditCustomer/blockUnblock/${id}`, {
+      const res = await fetch(`https://pharmacy-erp.onrender.com/creditCustomer/blockUnblock/${id}`, {
         method: "PATCH",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -48,7 +48,7 @@ function ManageCreditCustomer() {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:3000/creditCustomer/refill/${id}`, {
+      const res = await fetch(`https://pharmacy-erp.onrender.com/creditCustomer/refill/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

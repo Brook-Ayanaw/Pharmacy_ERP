@@ -36,7 +36,7 @@ function SaleHistory() {
 
   const fetchStores = async () => {
     try {
-      const res = await fetch("http://localhost:3000/store/all");
+      const res = await fetch("https://pharmacy-erp.onrender.com/store/all");
       const data = await res.json();
       if (res.ok) setAllStores(data);
     } catch (err) {
@@ -53,8 +53,8 @@ function SaleHistory() {
       };
 
       const url = selectedStoreId
-        ? "http://localhost:3000/sale/sellHistoryByDate"
-        : "http://localhost:3000/sale/sellHistoryByStores";
+        ? "https://pharmacy-erp.onrender.com/sale/sellHistoryByDate"
+        : "https://pharmacy-erp.onrender.com/sale/sellHistoryByStores";
 
       const payload = selectedStoreId
         ? { date: selectedDate, storeId: selectedStoreId }

@@ -23,7 +23,7 @@ function AddSupplier() {
         account_numbers: accountNumbers.filter((a) => a.trim() !== ""),
       };
 
-      const res = await axios.post("http://localhost:3000/supplier/add", payload);
+      const res = await axios.post("https://pharmacy-erp.onrender.com/supplier/add", payload);
       alert("Supplier added successfully!");
       console.log(res.data);
 

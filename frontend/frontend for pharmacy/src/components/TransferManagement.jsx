@@ -32,7 +32,7 @@ function TransferManagment() {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/product/allProduct");
+      const res = await axios.get("https://pharmacy-erp.onrender.com/product/allProduct");
       const filtered = res.data.filter((p) =>
         appointedStoreIds.includes(p.store?._id)
       );
@@ -44,7 +44,7 @@ function TransferManagment() {
 
   const fetchStores = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/store/all");
+      const res = await axios.get("https://pharmacy-erp.onrender.com/store/all");
       setStores(res.data);
     } catch (err) {
       console.error("Error loading stores:", err);
@@ -85,7 +85,7 @@ function TransferManagment() {
 
     try {
       const res = await axios.put(
-        `http://localhost:3000/product/transfer/${selectedProduct._id}`,
+        `https://pharmacy-erp.onrender.com/product/transfer/${selectedProduct._id}`,
         {
           quantity: Number(quantity),
           senderId: senderStore,

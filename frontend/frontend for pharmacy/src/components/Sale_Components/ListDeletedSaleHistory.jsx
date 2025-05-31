@@ -7,7 +7,7 @@ function ListDeletedSaleHistory() {
 
   const fetchDeletedSales = async () => {
     try {
-      const res = await fetch("http://localhost:3000/sale/listDeleted");
+      const res = await fetch("https://pharmacy-erp.onrender.com/sale/listDeleted");
       const data = await res.json();
 
       if (Array.isArray(data)) setDeletedSales(data);

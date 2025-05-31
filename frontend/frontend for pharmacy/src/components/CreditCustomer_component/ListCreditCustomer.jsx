@@ -14,7 +14,7 @@ function ListCreditCustomer() {
   const fetchCustomers = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:3000/creditCustomer/all", {
+      const res = await axios.get("https://pharmacy-erp.onrender.com/creditCustomer/all", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -30,7 +30,7 @@ function ListCreditCustomer() {
       setLoadingId(id);
       const token = localStorage.getItem("token");
       const res = await axios.patch(
-        `http://localhost:3000/creditCustomer/blockUnblock/${id}`,
+        `https://pharmacy-erp.onrender.com/creditCustomer/blockUnblock/${id}`,
         {},
         {
           headers: {

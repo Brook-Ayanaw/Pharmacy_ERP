@@ -30,7 +30,7 @@ function ReportDamagedProduct() {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/product/allProduct");
+      const res = await axios.get("https://pharmacy-erp.onrender.com/product/allProduct");
       const filtered = res.data.filter((p) => appointedStores.includes(p.store?._id));
       setProducts(filtered);
     } catch (err) {
@@ -48,7 +48,7 @@ function ReportDamagedProduct() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/product/addDamaged",
+        "https://pharmacy-erp.onrender.com/product/addDamaged",
         { productId: selectedProduct.value, quantity, reason },
         { headers: { Authorization: `Bearer ${token}` } }
       );

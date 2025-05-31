@@ -43,7 +43,7 @@ function AddUser() {
 
   const fetchRoles = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/role/all");
+      const res = await axios.get("https://pharmacy-erp.onrender.com/role/all");
       const options = res.data.map((r) => ({
         value: r._id,
         label: r.name
@@ -70,7 +70,7 @@ function AddUser() {
     setMessage("");
 
     try {
-      await axios.post("http://localhost:3000/user/add", formData);
+      await axios.post("https://pharmacy-erp.onrender.com/user/add", formData);
       alert("User added successfully!");
       setFormData({
         name: "",

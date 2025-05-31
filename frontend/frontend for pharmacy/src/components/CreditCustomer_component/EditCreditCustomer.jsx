@@ -20,7 +20,7 @@ function EditCreditCustomer() {
     const fetchAll = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:3000/creditCustomer/all", {
+        const res = await axios.get("https://pharmacy-erp.onrender.com/creditCustomer/all", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -45,7 +45,7 @@ function EditCreditCustomer() {
       try {
         const token = localStorage.getItem("token");
         const res = await axios.get(
-          `http://localhost:3000/creditCustomer/${selectedOption.value}`,
+          `https://pharmacy-erp.onrender.com/creditCustomer/${selectedOption.value}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -77,7 +77,7 @@ function EditCreditCustomer() {
     try {
       const token = localStorage.getItem("token");
       await axios.patch(
-        `http://localhost:3000/creditCustomer/edit/${selectedOption.value}`,
+        `https://pharmacy-erp.onrender.com/creditCustomer/edit/${selectedOption.value}`,
         {
           ...formData,
           balance: parseFloat(formData.balance),

@@ -33,7 +33,7 @@ function EditProfile() {
         return;
       }
 
-      const res = await axios.get(`http://localhost:3000/user/userById/${userId}`, {
+      const res = await axios.get(`https://pharmacy-erp.onrender.com/user/userById/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -62,7 +62,7 @@ function EditProfile() {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.put("http://localhost:3000/user/edit-profile", formData, {
+      await axios.put("https://pharmacy-erp.onrender.com/user/edit-profile", formData, {
         headers: {
           Authorization: `Bearer ${token}`
         }

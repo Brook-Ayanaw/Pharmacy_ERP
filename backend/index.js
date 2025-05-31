@@ -5,7 +5,7 @@ const cors = require('cors');
 const app = express();
 
 // 👇 Replace this with your actual MongoDB Atlas connection string
-const MONGO_URI = "mongodb+srv://Test:Appleabc1231991@cluster0.vi1c1uw.mongodb.net/pharmacy_erp?retryWrites=true&w=majority&appName=Cluster0";
+const MONGO_URI = "mongodb+srv://Test:JustTrying@cluster0.vi1c1uw.mongodb.net/pharmacy_erp?retryWrites=true&w=majority&appName=Cluster0";
 const PORT = 3000; // You can change this if needed
 
 // Middleware

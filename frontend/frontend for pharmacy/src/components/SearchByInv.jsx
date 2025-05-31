@@ -9,7 +9,7 @@ function SearchByInv() {
 
   async function handleSearch() {
     try {
-      const response = await axios.post("http://localhost:3000/product/allByInvoice", {
+      const response = await axios.post("https://pharmacy-erp.onrender.com/product/allByInvoice", {
         invoiceNumber: invNum,
       });
 

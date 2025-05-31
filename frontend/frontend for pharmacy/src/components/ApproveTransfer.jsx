@@ -12,7 +12,7 @@ function ApproveTransfer() {
 
   const fetchAllTransferHistories = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/product/transfers");
+      const res = await axios.get("https://pharmacy-erp.onrender.com/product/transfers");
       setTransferHistories(res.data.message || []);
     } catch (error) {
       console.error("Error fetching transfer history:", error);
@@ -30,7 +30,7 @@ function ApproveTransfer() {
       if (!userId) return alert("Invalid token. Please login again.");
 
       const res = await axios.put(
-        `http://localhost:3000/product/approveTransfer/${transfer._id}`,
+        `https://pharmacy-erp.onrender.com/product/approveTransfer/${transfer._id}`,
         {
           status: "approved",
           userId,

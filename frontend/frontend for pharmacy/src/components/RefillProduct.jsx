@@ -34,7 +34,7 @@ function RefillProduct() {
       const decoded = jwtDecode(token);
       const appointedStoreIds = decoded.appointedStore || [];
 
-      const res = await axios.get("http://localhost:3000/product/allBrand");
+      const res = await axios.get("https://pharmacy-erp.onrender.com/product/allBrand");
       const allBrands = res.data;
 
       // Filter brands to only include those from appointed stores
@@ -51,7 +51,7 @@ function RefillProduct() {
 
   const fetchSuppliers = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/supplier/all");
+      const res = await axios.get("https://pharmacy-erp.onrender.com/supplier/all");
       setSuppliers(res.data);
     } catch (err) {
       setMessage("Failed to fetch suppliers");
@@ -80,7 +80,7 @@ function RefillProduct() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/product/RefillBrandProduct",
+        "https://pharmacy-erp.onrender.com/product/RefillBrandProduct",
         formData
       );
 

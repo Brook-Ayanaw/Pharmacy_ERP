@@ -14,7 +14,7 @@ function ListUser() {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/user/all");
+      const res = await axios.get("https://pharmacy-erp.onrender.com/user/all");
       setUsers(res.data);
     } catch (err) {
       console.error(err);

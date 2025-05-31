@@ -9,7 +9,7 @@ function ListStore() {
     useEffect(() => {
         const fetchStores = async () => {
             try {
-                const res = await fetch("http://localhost:3000/store/all");
+                const res = await fetch("https://pharmacy-erp.onrender.com/store/all");
                 const data = await res.json();
 
                 if (res.ok) {

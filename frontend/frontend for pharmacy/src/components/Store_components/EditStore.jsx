@@ -36,9 +36,9 @@ function EditStore() {
         const fetchData = async () => {
             try {
                 const [storeRes, entityRes, userRes] = await Promise.all([
-                    fetch("http://localhost:3000/store/all"),
-                    fetch("http://localhost:3000/entity/all"),
-                    fetch("http://localhost:3000/user/all"),
+                    fetch("https://pharmacy-erp.onrender.com/store/all"),
+                    fetch("https://pharmacy-erp.onrender.com/entity/all"),
+                    fetch("https://pharmacy-erp.onrender.com/user/all"),
                 ]);
 
                 const [storeData, entityData, userData] = await Promise.all([
@@ -97,7 +97,7 @@ function EditStore() {
         try {
             const token = localStorage.getItem("token");
 
-            const res = await fetch(`http://localhost:3000/store/edit/${selectedStoreId}`, {
+            const res = await fetch(`https://pharmacy-erp.onrender.com/store/edit/${selectedStoreId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

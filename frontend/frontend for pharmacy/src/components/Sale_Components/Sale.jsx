@@ -36,7 +36,7 @@ function Sale() {
   useEffect(() => {
     if (!isPharmacist) return;
 
-    fetch("http://localhost:3000/store/all")
+    fetch("https://pharmacy-erp.onrender.com/store/all")
       .then(res => res.json())
       .then(data => setAllStores(data))
       .catch(err => {
@@ -56,7 +56,7 @@ function Sale() {
     setFormData(prev => ({ ...prev, productId: "" }));
 
     try {
-      const res = await fetch("http://localhost:3000/product/allBrand");
+      const res = await fetch("https://pharmacy-erp.onrender.com/product/allBrand");
       const data = await res.json();
       const filtered = data.filter(b => b.store?._id === storeId);
       setBrands(filtered);
@@ -75,7 +75,7 @@ function Sale() {
 
     try {
       const res = await fetch(
-        `http://localhost:3000/product/byStoreAndBrand?storeId=${selectedStoreId}&brandId=${option.value}`
+        `https://pharmacy-erp.onrender.com/product/byStoreAndBrand?storeId=${selectedStoreId}&brandId=${option.value}`
       );
       const data = await res.json();
 
@@ -109,7 +109,7 @@ function Sale() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/sale/sell", {
+      const res = await fetch("https://pharmacy-erp.onrender.com/sale/sell", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

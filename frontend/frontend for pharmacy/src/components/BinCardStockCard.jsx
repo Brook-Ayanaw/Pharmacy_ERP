@@ -27,7 +27,7 @@ function BinCardStockCard() {
       const decoded = jwtDecode(token);
       const appointedStores = decoded.appointedStore || [];
 
-      const res = await axios.get("http://localhost:3000/store/all");
+      const res = await axios.get("https://pharmacy-erp.onrender.com/store/all");
       const options = res.data
         .filter((s) => appointedStores.includes(s._id))
         .map((s) => ({ value: s._id, label: s.name }));
@@ -43,7 +43,7 @@ function BinCardStockCard() {
     setSelectedStoreId(storeId);
     setProducts([]);
     try {
-      const res = await axios.get(`http://localhost:3000/binCard/brandsByStore/${storeId}`);
+      const res = await axios.get(`https://pharmacy-erp.onrender.com/binCard/brandsByStore/${storeId}`);
       const brandOptions = res.data.map((b) => ({
         value: b._id,
         label: b.name
@@ -57,7 +57,7 @@ function BinCardStockCard() {
   const handleBrandChange = async (selectedOption) => {
     if (!selectedStoreId) return alert("Select a store first.");
     try {
-      const res = await axios.get("http://localhost:3000/binCard/byStoreAndBrand", {
+      const res = await axios.get("https://pharmacy-erp.onrender.com/binCard/byStoreAndBrand", {
         params: {
           storeId: selectedStoreId,
           brandId: selectedOption.value

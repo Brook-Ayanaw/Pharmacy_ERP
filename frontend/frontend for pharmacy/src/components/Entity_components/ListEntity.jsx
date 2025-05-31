@@ -9,7 +9,7 @@ function ListEntity() {
     useEffect(() => {
         const fetchEntities = async () => {
             try {
-                const response = await fetch("http://localhost:3000/entity/all");
+                const response = await fetch("https://pharmacy-erp.onrender.com/entity/all");
                 const data = await response.json();
 
                 if (response.ok) {

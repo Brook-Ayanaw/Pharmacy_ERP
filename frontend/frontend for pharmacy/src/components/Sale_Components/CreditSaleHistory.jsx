@@ -11,7 +11,7 @@ function CreditSaleHistory() {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await fetch("http://localhost:3000/creditSell/credit/all", {
+        const res = await fetch("https://pharmacy-erp.onrender.com/creditSell/credit/all", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

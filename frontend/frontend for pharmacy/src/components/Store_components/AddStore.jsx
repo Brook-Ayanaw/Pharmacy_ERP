@@ -16,8 +16,8 @@ function AddStore() {
         const fetchData = async () => {
             try {
                 const [entitiesRes, usersRes] = await Promise.all([
-                    fetch("http://localhost:3000/entity/all"),
-                    fetch("http://localhost:3000/user/all"),
+                    fetch("https://pharmacy-erp.onrender.com/entity/all"),
+                    fetch("https://pharmacy-erp.onrender.com/user/all"),
                 ]);
 
                 const entitiesData = await entitiesRes.json();
@@ -61,7 +61,7 @@ function AddStore() {
         try {
             const token = localStorage.getItem("token");
 
-            const res = await fetch("http://localhost:3000/store/add", {
+            const res = await fetch("https://pharmacy-erp.onrender.com/store/add", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

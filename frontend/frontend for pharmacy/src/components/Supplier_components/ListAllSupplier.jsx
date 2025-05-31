@@ -17,7 +17,7 @@ function ListAllSupplier() {
 
   const fetchSuppliers = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/supplier/all");
+      const res = await axios.get("https://pharmacy-erp.onrender.com/supplier/all");
       setSuppliers(res.data);
     } catch (err) {
       console.error("Error fetching suppliers:", err);

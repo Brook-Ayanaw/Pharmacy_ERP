@@ -1,0 +1,45 @@
+/* ListDeletedSaleHistory.module.css */
+
+.container {
+    padding: 1rem;
+    font-family: Arial, sans-serif;
+  }
+  
+  h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .search {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  .table th,
+  .table td {
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #f4f4f4;
+  }
+  
+  .table tr:nth-child(even) {
+    background-color: #fafafa;
+  }
+  
+  .table tr:hover {
+    background-color: #f1f1f1;
+  }
+  

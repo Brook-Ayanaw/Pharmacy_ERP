@@ -1,0 +1,68 @@
+.container {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fdfdfd;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.07);
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .formGroup {
+    margin-bottom: 1.2rem;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.4rem;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .selectedList {
+    list-style: none;
+    padding-left: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  .selectedList li {
+    margin-bottom: 0.4rem;
+  }
+  
+  .selectedList button {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+  }
+  
+  .submitButton {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 0.6rem;
+    background-color: #1976d2;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .message {
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: bold;
+  }
+  

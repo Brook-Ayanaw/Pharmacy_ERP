@@ -1,0 +1,23 @@
+.contactSelectRow {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.3rem;
+  }
+  
+  .selectedList {
+    list-style: none;
+    padding-left: 1rem;
+  }
+  
+  .selectedList li {
+    margin-bottom: 0.4rem;
+  }
+  
+  .selectedList button {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  

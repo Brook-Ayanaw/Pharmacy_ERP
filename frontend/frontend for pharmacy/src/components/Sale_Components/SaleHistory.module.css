@@ -1,0 +1,67 @@
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #1e2a38;
+  }
+  
+  .formGroup {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  input[type="date"] {
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  .message {
+    text-align: center;
+    color: #cc0000;
+    font-weight: bold;
+    margin-top: 1rem;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  .table th,
+  .table td {
+    border: 1px solid #eee;
+    padding: 0.75rem;
+    text-align: center;
+  }
+  
+  .table th {
+    background-color: #f0f4f7;
+    color: #333;
+  }
+  
+  .total {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: right;
+  }
+  .filterGroup {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  

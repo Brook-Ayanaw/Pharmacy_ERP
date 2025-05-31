@@ -1,0 +1,58 @@
+/* ReportDamagedProduct.module.css */
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f0f4f8;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    text-align: center;
+    color: #0b6e4f;
+    margin-bottom: 20px;
+  }
+  
+  .select,
+  .input,
+  .textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  .button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0b6e4f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #095c3f;
+  }
+  
+  .message {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .success {
+    color: green;
+  }
+  
+  .error {
+    color: red;
+  }
+  

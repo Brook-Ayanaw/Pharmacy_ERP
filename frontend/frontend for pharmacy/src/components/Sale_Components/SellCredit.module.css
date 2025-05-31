@@ -1,0 +1,53 @@
+.container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 24px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #01787e;
+    margin-bottom: 20px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  label {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  input {
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    padding: 10px 16px;
+    font-size: 16px;
+    background-color: #01787e;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #026066;
+  }
+  
+  .message {
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: center;
+  }
+  

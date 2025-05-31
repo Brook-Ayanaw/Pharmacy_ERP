@@ -12,7 +12,7 @@ function ManageCreditSells() {
 
   const fetchSales = async () => {
     try {
-      const creditRes = await fetch("http://localhost:3000/creditSell/credit/all", {
+      const creditRes = await fetch("https://pharmacy-erp.onrender.com/creditSell/credit/all", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -35,7 +35,7 @@ function ManageCreditSells() {
     }
 
     try {
-      const res = await fetch(`http://localhost:3000/creditSell/deleteCreditSale/${saleId}`, {
+      const res = await fetch(`https://pharmacy-erp.onrender.com/creditSell/deleteCreditSale/${saleId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

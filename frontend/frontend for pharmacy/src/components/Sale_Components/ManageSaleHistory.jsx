@@ -11,7 +11,7 @@ function ManageSaleHistory() {
 
   const fetchSales = async () => {
     try {
-      const saleRes = await fetch("http://localhost:3000/sale/all", {
+      const saleRes = await fetch("https://pharmacy-erp.onrender.com/sale/all", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -32,7 +32,7 @@ function ManageSaleHistory() {
     if (!reason) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/sale/deleteSale/${saleId}`, {
+      const res = await fetch(`https://pharmacy-erp.onrender.com/sale/deleteSale/${saleId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

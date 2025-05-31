@@ -23,7 +23,7 @@ function EditSupplier() {
 
   const fetchSuppliers = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/supplier/all");
+      const res = await axios.get("https://pharmacy-erp.onrender.com/supplier/all");
       setSuppliers(res.data);
     } catch (err) {
       console.error(err);
@@ -65,7 +65,7 @@ function EditSupplier() {
     if (!selectedSupplier) return;
 
     try {
-      await axios.put(`http://localhost:3000/supplier/edit/${selectedSupplier}`, formData, {
+      await axios.put(`https://pharmacy-erp.onrender.com/supplier/edit/${selectedSupplier}`, formData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert("Supplier updated successfully.");

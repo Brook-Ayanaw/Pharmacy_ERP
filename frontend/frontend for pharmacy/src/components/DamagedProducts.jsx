@@ -29,7 +29,7 @@ function DamagedProducts() {
 
   const fetchStores = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/store/all");
+      const res = await axios.get("https://pharmacy-erp.onrender.com/store/all");
       setStores(res.data);
     } catch (err) {
       console.error("Error fetching stores:", err);
@@ -50,7 +50,7 @@ function DamagedProducts() {
       }
 
       const res = await axios.post(
-        "http://localhost:3000/product/listDamagedByStoreAndDate",
+        "https://pharmacy-erp.onrender.com/product/listDamagedByStoreAndDate",
         payload,
         {
           headers: {

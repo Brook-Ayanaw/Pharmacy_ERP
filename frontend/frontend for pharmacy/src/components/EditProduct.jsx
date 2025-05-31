@@ -29,9 +29,9 @@ function EditProduct() {
       setAppointedStores(appointed);
 
       const [prodRes, suppRes, storeRes] = await Promise.all([
-        axios.get("http://localhost:3000/product/allProduct"),
-        axios.get("http://localhost:3000/supplier/all"),
-        axios.get("http://localhost:3000/store/all"),
+        axios.get("https://pharmacy-erp.onrender.com/product/allProduct"),
+        axios.get("https://pharmacy-erp.onrender.com/supplier/all"),
+        axios.get("https://pharmacy-erp.onrender.com/store/all"),
       ]);
 
       const filteredProducts = prodRes.data.filter(p =>
@@ -77,7 +77,7 @@ function EditProduct() {
 
     try {
       await axios.put(
-        `http://localhost:3000/product/editProduct/${selectedProduct}`,
+        `https://pharmacy-erp.onrender.com/product/editProduct/${selectedProduct}`,
         formData,
         {
           headers: { Authorization: `Bearer ${token}` }

@@ -9,7 +9,7 @@ function ListAllProduct() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/product/allProduct");
+        const response = await axios.get("https://pharmacy-erp.onrender.com/product/allProduct");
         setProducts(response.data);
       } catch (error) {
         console.error("Error fetching products:", error.response?.data || error.message);

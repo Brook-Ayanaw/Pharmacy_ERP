@@ -46,7 +46,7 @@ function AddCreditCustomer() {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        "http://localhost:3000/creditCustomer/add",
+        "https://pharmacy-erp.onrender.com/creditCustomer/add",
         {
           ...formData,
           balance: parseFloat(formData.balance),

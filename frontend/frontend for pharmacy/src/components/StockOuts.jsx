@@ -16,7 +16,7 @@ function StockOuts() {
     setError("");
 
     try {
-      const response = await axios.get("http://localhost:3000/product/stockOut");
+      const response = await axios.get("https://pharmacy-erp.onrender.com/product/stockOut");
 
       const stockOuts = response.data.stockOuts || [];
 

@@ -36,7 +36,7 @@ function ManageUsers() {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/user/all", {
+      const res = await axios.get("https://pharmacy-erp.onrender.com/user/all", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(res.data);
@@ -48,7 +48,7 @@ function ManageUsers() {
 
   const fetchRoles = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/role/all", {
+      const res = await axios.get("https://pharmacy-erp.onrender.com/role/all", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setRoles(res.data);
@@ -60,7 +60,7 @@ function ManageUsers() {
 
   const fetchStores = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/store/all", {
+      const res = await axios.get("https://pharmacy-erp.onrender.com/store/all", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setStores(res.data);
@@ -73,7 +73,7 @@ function ManageUsers() {
   const handleAddRole = async (userId, roleId) => {
     try {
       await axios.patch(
-        `http://localhost:3000/user/addUserRole/${userId}`,
+        `https://pharmacy-erp.onrender.com/user/addUserRole/${userId}`,
         { role: roleId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -87,7 +87,7 @@ function ManageUsers() {
   const handleRemoveRole = async (userId, roleId) => {
     try {
       await axios.patch(
-        `http://localhost:3000/user/removeUserRole/${userId}`,
+        `https://pharmacy-erp.onrender.com/user/removeUserRole/${userId}`,
         { role: roleId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -102,7 +102,7 @@ function ManageUsers() {
     const newStatus = currentStatus === "ok" ? "block" : "ok";
     try {
       await axios.patch(
-        `http://localhost:3000/user/setBlockStatus/${userId}`,
+        `https://pharmacy-erp.onrender.com/user/setBlockStatus/${userId}`,
         { blockStatus: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -119,7 +119,7 @@ function ManageUsers() {
 
     try {
       await axios.patch(
-        `http://localhost:3000/user/addAppointedStore/${userId}`,
+        `https://pharmacy-erp.onrender.com/user/addAppointedStore/${userId}`,
         { storeId },
         {
           headers: {
@@ -139,7 +139,7 @@ function ManageUsers() {
     if (!storeId) return;
     try {
       await axios.patch(
-        `http://localhost:3000/user/removeAppointedStore/${userId}/${storeId}`,
+        `https://pharmacy-erp.onrender.com/user/removeAppointedStore/${userId}/${storeId}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

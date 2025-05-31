@@ -31,7 +31,7 @@ function AddEntity() {
         try {
             const token = localStorage.getItem("token");
 
-            const response = await fetch("http://localhost:3000/entity/add", {
+            const response = await fetch("https://pharmacy-erp.onrender.com/entity/add", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

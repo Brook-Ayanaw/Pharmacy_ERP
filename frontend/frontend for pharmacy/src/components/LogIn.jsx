@@ -16,7 +16,7 @@ function LogIn() {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/login/login', {
+      const response = await axios.post('https://pharmacy-erp.onrender.com/login/login', {
         email,
         password,
       });

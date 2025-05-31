@@ -22,7 +22,7 @@ const AddProduct = () => {
       const decoded = jwtDecode(token);
       const appointedStoreIds = decoded.appointedStore || [];
   
-      axios.get("http://localhost:3000/store/all").then(res => {
+      axios.get("https://pharmacy-erp.onrender.com/store/all").then(res => {
         const filteredStores = res.data.filter(store =>
           appointedStoreIds.includes(store._id)
         );
@@ -32,7 +32,7 @@ const AddProduct = () => {
       console.error("JWT decode failed or fetch error:", err);
     }
   
-    axios.get("http://localhost:3000/supplier/all").then(res => setSuppliers(res.data));
+    axios.get("https://pharmacy-erp.onrender.com/supplier/all").then(res => setSuppliers(res.data));
   }, []);
   
   const handleChange = (e) => {
@@ -43,7 +43,7 @@ const AddProduct = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:3000/product/addNewBrandProduct", formData);
+      await axios.post("https://pharmacy-erp.onrender.com/product/addNewBrandProduct", formData);
       alert("Product added successfully!");
     } catch (err) {
       alert("Error adding product: " + err.message);

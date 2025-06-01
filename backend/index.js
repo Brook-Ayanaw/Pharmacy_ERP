@@ -10,7 +10,14 @@ const PORT = 3000; // You can change this if needed
 
 // Middleware
 app.use(express.json());
-app.use(cors({ origin: "*" }));
+//app.use(cors({ origin: "*" }));
+app.use(cors({
+  origin: "https://pharmacy-erp-1.onrender.com", // ✅ only your frontend
+  credentials: true,                              // ✅ if you send tokens/cookies
+  methods: ["GET", "POST", "PUT", "DELETE"],      // ✅ limit to used HTTP methods
+  allowedHeaders: ["Content-Type", "Authorization"] // ✅ limit headers
+}));
+
 
 // MongoDB Connection
 mongoose.connect(MONGO_URI, {

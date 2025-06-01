@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const authenticate = require("./middleware/auth");
 
 const app = express();
 
@@ -44,17 +45,17 @@ const creditSellRoute = require('./routes/creditSellRoute');
 
 // Apply routes
 app.use('/test', testRoute);
-app.use('/supplier', supplierRoute);
-app.use('/product', productRoute);
-app.use('/user', userRoute);
-app.use('/sale', saleRoute);
-app.use('/role', roleRoute);
-app.use('/entity', entityRoute);
-app.use('/store', storeRoute);
+app.use('/supplier',authenticate, supplierRoute);
+app.use('/product',authenticate, productRoute);
+app.use('/user',authenticate, userRoute);
+app.use('/sale',authenticate, saleRoute);
+app.use('/role',authenticate, roleRoute);
+app.use('/entity',authenticate, entityRoute);
+app.use('/store',authenticate, storeRoute);
 app.use('/login', loginRoute);
-app.use('/binCard', binCardRoute);
-app.use('/creditCustomer', creditCustomerRoute);
-app.use('/creditSell', creditSellRoute);
+app.use('/binCard',authenticate, binCardRoute);
+app.use('/creditCustomer', authenticate,creditCustomerRoute);
+app.use('/creditSell',authenticate, creditSellRoute);
 
 // Home route
 app.get('/', (req, res) => {

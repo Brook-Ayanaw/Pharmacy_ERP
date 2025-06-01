@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cors({
   origin: "https://pharmacy-erp-1.onrender.com", // ✅ only your frontend
   credentials: true,                              // ✅ if you send tokens/cookies
-  methods: ["GET", "POST", "PUT", "DELETE"],      // ✅ limit to used HTTP methods
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],      // ✅ limit to used HTTP methods
   allowedHeaders: ["Content-Type", "Authorization"] // ✅ limit headers
 }));
 

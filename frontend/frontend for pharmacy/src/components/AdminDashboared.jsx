@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import ListAllSupplier from './Supplier_components/ListAllSupplier';
 import AddSupplier from './Supplier_components/AddSupplier';
 import EditSupplier from './Supplier_components/EditSupplier';
-import RefillProduct from './RefillProduct';
+import RefillProduct from './refillProduct';
 import SearchByInv from './SearchByInv';
 import Logout from './User_Components/Logout';
 import ListUser from './User_Components/ListUser';
@@ -40,6 +40,7 @@ import CreditSaleHistory from './Sale_Components/CreditSaleHistory';
 import ManageCreditSells from './Sale_Components/ManageCreditSells';
 import ManageSaleHistory from './Sale_Components/ManageSaleHistory';
 import ListDeletedSaleHistory from './Sale_Components/ListDeletedSaleHistory';
+import TransferReport from './TransferReport';
 
 function AdminDashboared() {
   const [expanded, setExpanded] = useState(null);
@@ -86,6 +87,7 @@ function AdminDashboared() {
               <li onClick={() => handleComponentSwitch("binCard")}>Bin Card</li>
               <li onClick={() => handleComponentSwitch("filter")}>Filter Products</li>
               <li onClick={() => handleComponentSwitch("transfer")}>Transfer</li>
+              <li onClick={() => handleComponentSwitch("TransferReport")}>Transfer Report</li>
               <li onClick={() => handleComponentSwitch("approveTransfer")}>Approve Transfer</li>
               <li onClick={() => handleComponentSwitch("expiring")}>Expiring</li>
               <li onClick={() => handleComponentSwitch("damaged")}>List Damaged</li>
@@ -192,6 +194,7 @@ function AdminDashboared() {
         {activeComponent === "manageCreditSells" && <ManageCreditSells/>}
         {activeComponent === "manageSaleHistory" && <ManageSaleHistory/>}
         {activeComponent === "listDeletedSaleHistory" && <ListDeletedSaleHistory/>}
+        {activeComponent === "TransferReport" && <TransferReport/>}
       </main>
 
       <footer className={style.footer}>

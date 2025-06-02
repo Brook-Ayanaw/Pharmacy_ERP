@@ -968,6 +968,28 @@ router.get('/productsByAppointedStores', authenticate, async (req, res) => {
     res.status(500).json({ message: "Server error: " + err.message });
   }
 });
+// this is for the report
+router.post('/transferReport', authenticate, async (req, res) => {
+  try {
+    const { senderStore, receiverStore, startDate, endDate } = req.body;
+
+    const transfers = await TransferHistory.find({
+      senderStore,
+      receiverStore,
+      status: "approved",
+      createdAt: {
+        $gte: new Date(startDate),
+        $lte: new Date(new Date(endDate).setHours(23, 59, 59, 999))
+      }
+    }).populate("product", "name");
+
+    const totalPrice = transfers.reduce((sum, transfer) => sum + (transfer.price * transfer.quantity), 0);
+
+    res.status(200).json({ totalPrice,transfers });
+  } catch (err) {
+    res.status(500).json({ message: "Error generating report", error: err.message });
+  }
+});
 
 
 module.exports = router;

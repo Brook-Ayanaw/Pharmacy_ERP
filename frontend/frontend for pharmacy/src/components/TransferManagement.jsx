@@ -57,7 +57,7 @@ function TransferManagment() {
 
     if (product) {
       setSelectedProduct(product);
-      setPrice(product.brand?.buyingPrice ?? "");
+      setPrice(product?.buyingPrice ?? "");
     } else {
       setSelectedProduct(null);
       setPrice("");

@@ -25,7 +25,7 @@ function TransferReport() {
   useEffect(() => {
     const fetchStores = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/store/all", authHeaders);
+        const res = await axios.get("https://pharmacy-erp.onrender.com/store/all", authHeaders);
         setStores(res.data);
       } catch (err) {
         setError("❌ Failed to load stores.");
@@ -48,7 +48,7 @@ function TransferReport() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/product/transferReport",
+        "https://pharmacy-erp.onrender.com/product/transferReport",
         { senderStore, receiverStore, startDate, endDate },
         authHeaders
       );

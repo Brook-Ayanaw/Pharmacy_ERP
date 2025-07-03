@@ -136,7 +136,7 @@ router.put('/editBrand/:id',authenticate, authorizeAdmin, async (req, res) => {
         if (!updatedBrand) {
             return res.status(404).json({ message: "Brand not found" });
         }
-
+        
         res.status(200).json({ message: "Brand updated successfully", updatedBrand });
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -144,46 +144,82 @@ router.put('/editBrand/:id',authenticate, authorizeAdmin, async (req, res) => {
 });
 
 // ✅ Edit a product (With Quantity Update)
-router.put('/editProduct/:id',authenticate, authorizeAdmin, async (req, res) => {
-    try {
-        const productId = req.params.id;
-        const { quantity, brand, ...updateData } = req.body; // Separate quantity from other updates
+router.put('/editProduct/:id', authenticate, authorizeAdmin, async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const { quantity, brand, ...updateData } = req.body;
 
-        // Find the existing product
-        const existingProduct = await Product.findById(productId);
-        if (!existingProduct) {
-            return res.status(404).json({ message: "Product not found" });
-        }
-
-        // Find the associated brand
-        const existingBrand = await Brand.findById(existingProduct.brand);
-        if (!existingBrand) {
-            return res.status(404).json({ message: "Associated brand not found" });
-        }
-
-        // ✅ Update Brand Quantity (Only if quantity is changed)
-        if (quantity && quantity !== existingProduct.quantity) {
-            const quantityDifference = quantity - existingProduct.quantity;
-            existingBrand.quantity += quantityDifference;
-            await existingBrand.save();
-        }
-
-        // ✅ Update the product
-        const updatedProduct = await Product.findByIdAndUpdate(
-            productId,
-            { quantity, ...updateData }, // Ensure quantity is updated
-            { new: true, runValidators: true }
-        );
-
-        res.status(200).json({ message: "Product updated successfully", updatedProduct });
-
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+    const existingProduct = await Product.findById(productId);
+    if (!existingProduct) {
+      return res.status(404).json({ message: "Product not found" });
     }
+
+    const existingBrand = await Brand.findById(existingProduct.brand);
+    if (!existingBrand) {
+      return res.status(404).json({ message: "Associated brand not found" });
+    }
+
+    // ✅ Update Brand Quantity
+    const currentQuantity = Number(existingProduct.quantity);
+    const newQuantity = Number(quantity);
+    const QD = newQuantity - currentQuantity;
+
+    if (quantity && newQuantity !== currentQuantity) {
+      existingBrand.quantity += QD;
+      await existingBrand.save();
+    }
+
+    const updatedProduct = await Product.findByIdAndUpdate(
+      productId,
+      { quantity: newQuantity, ...updateData },
+      { new: true, runValidators: true }
+    );
+
+    // ✅ Create BinCard entry if quantity changed
+    if (QD !== 0) {
+      try {
+        if (!existingProduct.supplier) {
+          return res.status(400).json({ message: "Missing supplier info for BinCard entry." });
+        }
+
+        const newBinCard = new BinCard({
+          itemCode: existingProduct._id,
+          brand: existingBrand._id,
+          name: existingProduct.name,
+          unitOfMeasure: existingBrand.sellingUnit,
+          category: existingProduct.category,
+          issuedQuantity: QD > 0 ? 0 : Math.abs(QD),
+          issuedTo: "Editing product",
+          receivedQuantity: QD > 0 ? QD : 0,
+          receivedFrom: "Editing product",
+          batch: existingProduct.batch,
+          expiry_date: new Date(existingProduct.expiry_date), // ✅ fixed
+          purchase_invoice: existingProduct.purchase_invoice,
+          supplier: existingProduct.supplier,
+          store: existingProduct.store,
+          remark: "Editing product"
+        });
+
+        await newBinCard.save();
+      } catch (binErr) {
+        console.error("BinCard creation error:", binErr);
+        // Optionally: return res.status(500).json({ message: "Product updated but BinCard failed." });
+      }
+    }
+
+    res.status(200).json({
+      message: "Product updated successfully",
+      updatedProduct,
+    });
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
+
 // ✅ Delete a product (With Quantity Update)
-router.delete('/deleteProduct/:id', async (req, res) => {
+router.delete('/deleteProduct/:id',authenticate, authorizeAdmin, async (req, res) => {
     try {
         const productId = req.params.id;
 
@@ -320,7 +356,8 @@ router.post('/addNewBrandProduct', async (req, res) => {
       expiry_date,
       purchase_invoice,
       supplier: validateSupplier._id,
-      store
+      store,
+      remark : "Adding new Brand product"
     });
 
     const savedBinCard = await newBinCard.save();
@@ -401,7 +438,8 @@ router.post('/RefillBrandProduct', async (req, res) => {
         expiry_date,
         purchase_invoice,
         supplier: validateSupplier._id,
-        store: oldBrand.store
+        store: oldBrand.store,
+        remark : "Refilling Product"
       });
   
       const savedBinCard = await newBinCard.save();
@@ -616,19 +654,30 @@ router.put('/transfer/:id', async (req, res) => {
     }
   });
   
-  // ✅ Get all transfers
-  router.get('/transfers', async (req, res) => {
-    try {
-      const transfers = await TransferHistory.find()
-        .populate("product", "name")
-        .populate("senderStore", "name -_id")
-        .populate("receiverStore", "name -_id");
-  
-      return res.status(200).json({ message: transfers });
-    } catch (error) {
-      res.status(500).json({ message: error.message });
+  // ✅ Get all transfers with optional date filter
+router.get('/transfers', async (req, res) => {
+  try {
+    const { startDate, endDate } = req.query;
+    let query = {};
+
+    if (startDate && endDate) {
+      query.createdAt = {
+        $gte: new Date(startDate),
+        $lte: new Date(endDate)
+      };
     }
-  });
+
+    const transfers = await TransferHistory.find(query)
+      .populate("product", "name")
+      .populate("senderStore", "name -_id")
+      .populate("receiverStore", "name -_id");
+
+    return res.status(200).json({ message: transfers });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
   
   // ✅ Approve or Reject a transfer
   router.put('/approveTransfer/:transferId', async (req, res) => {
@@ -714,7 +763,6 @@ router.put('/transfer/:id', async (req, res) => {
           supplier: senderProduct.supplier,
           expiry_date: senderProduct.expiry_date,
           purchase_invoice: senderProduct.purchase_invoice,
-          //entity: senderProduct.entity,
           entity: receiverStore.entity,
           batch: senderProduct.batch,
           store: transfer.receiverStore,
@@ -746,7 +794,8 @@ router.put('/transfer/:id', async (req, res) => {
         expiry_date : senderProduct.expiry_date,
         purchase_invoice : senderProduct.purchase_invoice,
         supplier: senderProduct.supplier,
-        store: senderProduct.store
+        store: senderProduct.store,
+        remark : "Transfered to other store"
       });
   
       const savedBinCard1 = await newBinCard.save();
@@ -769,7 +818,8 @@ router.put('/transfer/:id', async (req, res) => {
         expiry_date : senderProduct.expiry_date,
         purchase_invoice : senderProduct.purchase_invoice,
         supplier: senderProduct.supplier,
-        store: receiverProduct.store
+        store: receiverProduct.store,
+        remark : "received from other store"
       });
   
       const savedBinCard2 = await newAddBinCard.save();
@@ -855,6 +905,7 @@ router.post('/addDamaged', authenticate, async (req, res) => {
       purchase_invoice: theProduct.purchase_invoice,
       supplier: theProduct.supplier,
       store: theProduct.store,
+      remark: "Damaged"
     });
 
     await newBinCard.save();

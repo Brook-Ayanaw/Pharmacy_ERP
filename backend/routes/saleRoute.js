@@ -139,6 +139,7 @@ router.post('/sell', authenticate, authorizePharmacist, async (req, res) => {
             purchase_invoice: product.purchase_invoice,
             supplier: product.supplier,
             store: product.store,
+            remark: "sell"
         });
         await theBinCard.save();
 

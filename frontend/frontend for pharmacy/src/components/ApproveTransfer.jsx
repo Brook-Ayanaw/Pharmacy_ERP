@@ -19,7 +19,7 @@ function ApproveTransfer() {
       if (endDate) query.push(`endDate=${endDate}`);
       const queryString = query.length ? `?${query.join("&")}` : "";
 
-      const res = await axios.get(`http://localhost:3000/product/transfers${queryString}`);
+      const res = await axios.get(`https://pharmacy-erp.onrender.com/product/transfers${queryString}`);
       setTransferHistories(res.data.message || []);
     } catch (error) {
       console.error("Error fetching transfer history:", error);
@@ -37,7 +37,7 @@ function ApproveTransfer() {
       if (!userId) return alert("Invalid token. Please login again.");
 
       await axios.put(
-        `http://localhost:3000/product/approveTransfer/${transfer._id}`,
+        `https://pharmacy-erp.onrender.com/approveTransfer/${transfer._id}`,
         { status: "approved", userId }
       );
 

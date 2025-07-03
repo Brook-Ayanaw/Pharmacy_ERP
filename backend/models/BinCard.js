@@ -42,7 +42,6 @@ const binCardSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
-
     batch: {
       type: String,
       required: true,
@@ -64,8 +63,12 @@ const binCardSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Store',
       required: true,
+    },
+    remark: {
+      type: String,
+      trim: true,
+      default: null
     }
-
   },
   { timestamps: true }
 );

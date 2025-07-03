@@ -34,11 +34,11 @@ function EditProduct() {
         axios.get("https://pharmacy-erp.onrender.com/store/all"),
       ]);
 
-      const filteredProducts = prodRes.data.filter(p =>
+      const filteredProducts = prodRes.data.filter((p) =>
         p.store && appointed.includes(p.store._id)
       );
 
-      const filteredStores = storeRes.data.filter(s =>
+      const filteredStores = storeRes.data.filter((s) =>
         appointed.includes(s._id)
       );
 
@@ -53,21 +53,27 @@ function EditProduct() {
   const handleSelect = (product) => {
     setSelectedProduct(product._id);
     setFormData({
-      name: product.name,
-      category: product.category,
-      buyingPrice: product.buyingPrice,
-      sellingPrice: product.brand?.sellingPrice || "",
-      quantity: product.quantity,
+      name: product.name || "",
+      category: product.category || "",
+      buyingPrice: product.buyingPrice || 0,
+      sellingPrice: product.brand?.sellingPrice || 0,
+      quantity: product.quantity || 0,
+      purchaseQuantity: product.purchaseQuantity || 0,
       supplier: product.supplier?._id || "",
       store: product.store?._id || "",
       expiry_date: product.expiry_date?.split("T")[0] || "",
       purchase_invoice: product.purchase_invoice || "",
-      batch: product.batch || ""
+      batch: product.batch || "",
+      brand: product.brand?._id || "",
     });
+    setMessage("");
   };
 
   const handleChange = (e) => {
-    setFormData((f) => ({ ...f, [e.target.name]: e.target.value }));
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -80,11 +86,11 @@ function EditProduct() {
         `https://pharmacy-erp.onrender.com/product/editProduct/${selectedProduct}`,
         formData,
         {
-          headers: { Authorization: `Bearer ${token}` }
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
       alert("✅ Product updated!");
-      navigate("/dashboard");
+      setSelectedProduct(null); // Collapse dialog box
     } catch (err) {
       setMessage(err.response?.data?.message || "Update failed.");
     }
@@ -92,7 +98,7 @@ function EditProduct() {
 
   return (
     <div className={styles.container}>
-      <h2>Edit Product</h2>
+      <h2 className={styles.title}>Edit Product</h2>
 
       <input
         className={styles.searchInput}
@@ -100,49 +106,67 @@ function EditProduct() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
+<ul className={styles.list}>
+  {products
+    .filter((p) =>
+      `${p.name} ${p.batch}`.toLowerCase().includes(search.toLowerCase())
+    )
+    .map((p) => (
+      <li key={p._id} className={styles.item}>
+        <div className={styles.nameBlock}>
+          <div className={styles.productTitle}>
+            <strong>{p.name}</strong>{" "}
+            <span className={styles.batch}>Batch: <em>{p.batch}</em></span>
+          </div>
+          <div className={styles.storeName}>{p.store?.name}</div>
+        </div>
 
-      <ul className={styles.list}>
-        {products
-          .filter((p) => p.name.toLowerCase().includes(search.toLowerCase()))
-          .map((p) => (
-            <li key={p._id} className={styles.item}>
-              <span className={styles.name}>
-                {p.name} — {p.store?.name}
-              </span>
-              <button className={styles.editBtn} onClick={() => handleSelect(p)}>
-                Edit
-              </button>
-            </li>
-          ))}
-      </ul>
+        <div className={styles.buttonWrapper}>
+          <button
+            className={styles.editBtn}
+            onClick={() => handleSelect(p)}
+          >
+            ✏️ Edit
+          </button>
+        </div>
+      </li>
+    ))}
+</ul>
+
+
 
       {selectedProduct && (
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label htmlFor="name">Name</label>
+          <h3 className={styles.formTitle}>Editing: {formData.name}</h3>
+
+          <label>Name</label>
           <input name="name" value={formData.name} onChange={handleChange} required />
 
-          <label htmlFor="category">Category</label>
+          <label>Category</label>
           <input name="category" value={formData.category} onChange={handleChange} required />
 
-          <label htmlFor="buyingPrice">Buying Price</label>
+          <label>Buying Price</label>
           <input type="number" name="buyingPrice" value={formData.buyingPrice} onChange={handleChange} required />
 
-          <label htmlFor="sellingPrice">Selling Price</label>
+          <label>Selling Price</label>
           <input type="number" name="sellingPrice" value={formData.sellingPrice} onChange={handleChange} />
 
-          <label htmlFor="quantity">Quantity</label>
+          <label>Quantity</label>
           <input type="number" name="quantity" value={formData.quantity} onChange={handleChange} required />
 
-          <label htmlFor="batch">Batch</label>
+          <label>Purchase Quantity</label>
+          <input type="number" name="purchaseQuantity" value={formData.purchaseQuantity} onChange={handleChange} required />
+
+          <label>Batch</label>
           <input name="batch" value={formData.batch} onChange={handleChange} />
 
-          <label htmlFor="purchase_invoice">Invoice</label>
+          <label>Invoice</label>
           <input name="purchase_invoice" value={formData.purchase_invoice} onChange={handleChange} />
 
-          <label htmlFor="expiry_date">Expiry Date</label>
+          <label>Expiry Date</label>
           <input type="date" name="expiry_date" value={formData.expiry_date} onChange={handleChange} />
 
-          <label htmlFor="supplier">Supplier</label>
+          <label>Supplier</label>
           <select name="supplier" value={formData.supplier} onChange={handleChange} required>
             <option value="">Select Supplier</option>
             {suppliers.map((s) => (
@@ -150,7 +174,7 @@ function EditProduct() {
             ))}
           </select>
 
-          <label htmlFor="store">Store</label>
+          <label>Store</label>
           <select name="store" value={formData.store} onChange={handleChange} required>
             <option value="">Select Store</option>
             {stores.map((s) => (
@@ -159,8 +183,8 @@ function EditProduct() {
           </select>
 
           <div className={styles.buttonRow}>
-            <button type="submit" className={styles.saveBtn}>Save</button>
-            <button type="button" className={styles.cancelBtn} onClick={() => navigate("/dashboard")}>Cancel</button>
+            <button type="submit" className={styles.saveBtn}>💾 Save</button>
+            <button type="button" className={styles.cancelBtn} onClick={() => setSelectedProduct(null)}>❌ Cancel</button>
           </div>
         </form>
       )}

@@ -37,8 +37,7 @@ function RefillProduct() {
       const res = await axios.get("https://pharmacy-erp.onrender.com/product/allBrand");
       const allBrands = res.data;
 
-      // Filter brands to only include those from appointed stores
-      const filtered = allBrands.filter(brand =>
+      const filtered = allBrands.filter((brand) =>
         appointedStoreIds.includes(brand.store?._id)
       );
 
@@ -54,6 +53,7 @@ function RefillProduct() {
       const res = await axios.get("https://pharmacy-erp.onrender.com/supplier/all");
       setSuppliers(res.data);
     } catch (err) {
+      console.error("Error fetching suppliers:", err);
       setMessage("Failed to fetch suppliers");
     }
   };
@@ -77,14 +77,16 @@ function RefillProduct() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const res = await axios.post(
-        "https://pharmacy-erp.onrender.com/product/RefillBrandProduct",
+        "https://pharmacy-erp.onrender.com/RefillBrandProduct",
         formData
       );
 
       setMessage(res.data.message);
+
+      // Refresh brand list to show updated quantity
+      await fetchBrands();
 
       // Reset everything
       setSelectedBrand(null);
@@ -99,6 +101,7 @@ function RefillProduct() {
         batch: ""
       });
     } catch (err) {
+      console.error("Refill failed:", err);
       setMessage(err.response?.data?.message || "Refill failed");
     }
   };

@@ -237,7 +237,7 @@ router.delete('/deleteCreditSale/:saleId', authenticate, authorizeAdmin, async (
                 purchase_invoice: product.purchase_invoice,
                 supplier: product.supplier,
                 store: product.store,
-                remark : "Product credit sell return"
+                remark : "Deleted credit sell return"
                 
             }
         )

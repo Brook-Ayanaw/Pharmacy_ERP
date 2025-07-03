@@ -169,6 +169,7 @@ function BinCardStockCard() {
                 <th className={styles.th}>Balance</th>
                 <th className={styles.th}>Date</th>
                 <th className={styles.th}>Store</th>
+                <th className={styles.th}>Remark</th>
               </tr>
             </thead>
             <tbody>
@@ -191,6 +192,7 @@ function BinCardStockCard() {
                         {new Date(p.createdAt).toLocaleDateString()}
                       </td>
                       <td className={styles.td}>{p.store?.name || "Unknown"}</td>
+                      <td className={styles.td}>{p.remark || "Unknown"}</td>
                     </tr>
                   );
                 });

@@ -15,8 +15,8 @@ function BrandsWithQuantity() {
   const fetchData = async () => {
     try {
       const [brandsRes, storesRes] = await Promise.all([
-        axios.get("http://localhost:3000/product/allBrand"),
-        axios.get("http://localhost:3000/store/all"),
+        axios.get("https://pharmacy-erp.onrender.com/product/allBrand"),
+        axios.get("https://pharmacy-erp.onrender.com/store/all"),
       ]);
 
       // Only include brands with quantity > 0

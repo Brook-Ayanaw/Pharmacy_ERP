@@ -20,7 +20,7 @@ function EditBrand() {
       const decoded = jwtDecode(token);
       const appointedStores = decoded.appointedStore || [];
 
-      const res = await axios.get("https://pharmacy-erp.onrender.com/allBrand");
+      const res = await axios.get("https://pharmacy-erp.onrender.com/product/allBrand");
       const filtered = res.data.filter(b => appointedStores.includes(b.store._id));
       setBrands(filtered);
     } catch (err) {

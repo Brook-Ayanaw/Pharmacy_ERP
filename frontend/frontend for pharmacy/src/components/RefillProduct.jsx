@@ -75,34 +75,32 @@ function RefillProduct() {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post("https://pharmacy-erp.onrender.com/product/RefillBrandProduct", formData);
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await axios.post("https://pharmacy-erp.onrender.com/product/RefillBrandProduct", formData);
 
+    setMessage(res.data.message);
 
-      setMessage(res.data.message);
+    await fetchBrands(); // Refresh brands to update quantity
+    setSelectedBrand(null); // Reset brand selection
 
-      // Refresh brand list to show updated quantity
-      await fetchBrands();
+    setFormData({
+      brandID: "",
+      buyingPrice: "",
+      sellingPrice: "",
+      quantity: "",
+      supplier: "",
+      expiry_date: "",
+      purchase_invoice: "",
+      batch: ""
+    });
+  } catch (err) {
+    console.error("Refill failed:", err);
+    setMessage(err.response?.data?.message || "Refill failed");
+  }
+};
 
-      // Reset everything
-      setSelectedBrand(null);
-      setFormData({
-        brandID: "",
-        buyingPrice: "",
-        sellingPrice: "",
-        quantity: "",
-        supplier: "",
-        expiry_date: "",
-        purchase_invoice: "",
-        batch: ""
-      });
-    } catch (err) {
-      console.error("Refill failed:", err);
-      setMessage(err.response?.data?.message || "Refill failed");
-    }
-  };
 
   const filteredBrands = brands.filter((brand) =>
     brand.name?.toLowerCase().includes(searchTerm.toLowerCase())

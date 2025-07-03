@@ -20,7 +20,7 @@ function EditBrand() {
       const decoded = jwtDecode(token);
       const appointedStores = decoded.appointedStore || [];
 
-      const res = await axios.get("http://localhost:3000/product/allBrand");
+      const res = await axios.get("https://pharmacy-erp.onrender.com/allBrand");
       const filtered = res.data.filter(b => appointedStores.includes(b.store._id));
       setBrands(filtered);
     } catch (err) {
@@ -50,7 +50,7 @@ function EditBrand() {
 
     try {
       await axios.put(
-        `http://localhost:3000/product/editBrand/${selectedBrand}`,
+        `https://pharmacy-erp.onrender.com/product/editBrand/${selectedBrand}`,
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },

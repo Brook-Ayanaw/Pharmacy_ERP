@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import ListAllSupplier from './Supplier_components/ListAllSupplier';
 import AddSupplier from './Supplier_components/AddSupplier';
 import EditSupplier from './Supplier_components/EditSupplier';
-import RefillProduct from './RefillProduct';
+import RefillProduct from './refillProduct';
 import SearchByInv from './SearchByInv';
 import Logout from './User_Components/Logout';
 import ListUser from './User_Components/ListUser';
@@ -41,6 +41,8 @@ import ManageCreditSells from './Sale_Components/ManageCreditSells';
 import ManageSaleHistory from './Sale_Components/ManageSaleHistory';
 import ListDeletedSaleHistory from './Sale_Components/ListDeletedSaleHistory';
 import TransferReport from './TransferReport';
+import EditBrand from './EditBrand';
+import BrandsWithQuantity from './BrandsWithQuantity';
 
 function AdminDashboared() {
   const [expanded, setExpanded] = useState(null);
@@ -83,7 +85,8 @@ function AdminDashboared() {
             <ul className={`${style.submenu} ${expanded === "products" ? style.show : ""}`}>
               <li onClick={() => handleComponentSwitch("add")}>Add</li>
               <li onClick={() => handleComponentSwitch("refillProduct")}>Refill</li>
-              <li onClick={() => handleComponentSwitch("edit")}>Edit</li>
+              <li onClick={() => handleComponentSwitch("edit")}>Edit Product</li>
+              <li onClick={() => handleComponentSwitch("editBrand")}>Edit Brand</li>
               <li onClick={() => handleComponentSwitch("binCard")}>Bin Card</li>
               <li onClick={() => handleComponentSwitch("filter")}>Filter Products</li>
               <li onClick={() => handleComponentSwitch("transfer")}>Transfer</li>
@@ -94,6 +97,7 @@ function AdminDashboared() {
               <li onClick={() => handleComponentSwitch("reportDamaged")}>Report Damaged</li>
               <li onClick={() => handleComponentSwitch("stockOut")}>Stock Outs</li>
               <li onClick={() => handleComponentSwitch("searchByInv")}>Search by Invoice</li>
+              <li onClick={() => handleComponentSwitch("brandWithQuantity")}>Brands with Quantity</li>
             </ul>
           </li>
 
@@ -195,6 +199,8 @@ function AdminDashboared() {
         {activeComponent === "manageSaleHistory" && <ManageSaleHistory/>}
         {activeComponent === "listDeletedSaleHistory" && <ListDeletedSaleHistory/>}
         {activeComponent === "TransferReport" && <TransferReport/>}
+        {activeComponent === "editBrand" && <EditBrand/>}
+        {activeComponent === "brandWithQuantity" && <BrandsWithQuantity/>}
       </main>
 
       <footer className={style.footer}>

@@ -150,6 +150,7 @@ router.post('/creditSellHistoryByDate', async (req, res) => {
         purchase_invoice: product.purchase_invoice,
         supplier: product.supplier,
         store: product.store,
+        remark : "Credit-sells"
       });
   
       await binCard.save();
@@ -235,7 +236,8 @@ router.delete('/deleteCreditSale/:saleId', authenticate, authorizeAdmin, async (
                 expiry_date: product.expiry_date,
                 purchase_invoice: product.purchase_invoice,
                 supplier: product.supplier,
-                store: product.store
+                store: product.store,
+                remark : "Product credit sell return"
                 
             }
         )

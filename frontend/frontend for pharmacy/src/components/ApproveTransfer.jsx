@@ -37,7 +37,7 @@ function ApproveTransfer() {
       if (!userId) return alert("Invalid token. Please login again.");
 
       await axios.put(
-        `https://pharmacy-erp.onrender.com/approveTransfer/${transfer._id}`,
+        `https://pharmacy-erp.onrender.com/product/approveTransfer/${transfer._id}`,
         { status: "approved", userId }
       );
 

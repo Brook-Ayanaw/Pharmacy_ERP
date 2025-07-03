@@ -222,7 +222,7 @@ router.delete('/deleteSale/:saleId', authenticate, authorizeAdmin, async (req, r
                 purchase_invoice: product.purchase_invoice,
                 supplier: product.supplier,
                 store: product.store,
-                remark : "Deleted sell"
+                remark : "Deleted sell return"
                 
             }
         )

@@ -5,6 +5,8 @@ import styles from "./ApproveTransfer.module.css";
 
 function ApproveTransfer() {
   const [transferHistories, setTransferHistories] = useState([]);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   useEffect(() => {
     fetchAllTransferHistories();
@@ -12,11 +14,16 @@ function ApproveTransfer() {
 
   const fetchAllTransferHistories = async () => {
     try {
-      const res = await axios.get("https://pharmacy-erp.onrender.com/product/transfers");
+      const query = [];
+      if (startDate) query.push(`startDate=${startDate}`);
+      if (endDate) query.push(`endDate=${endDate}`);
+      const queryString = query.length ? `?${query.join("&")}` : "";
+
+      const res = await axios.get(`http://localhost:3000/product/transfers${queryString}`);
       setTransferHistories(res.data.message || []);
     } catch (error) {
       console.error("Error fetching transfer history:", error);
-      alert("Error: " + (error.response?.data?.error || error.message));
+      alert("Error: " + (error.response?.data?.message || error.message));
     }
   };
 
@@ -29,12 +36,9 @@ function ApproveTransfer() {
       const userId = decoded?.id;
       if (!userId) return alert("Invalid token. Please login again.");
 
-      const res = await axios.put(
-        `https://pharmacy-erp.onrender.com/product/approveTransfer/${transfer._id}`,
-        {
-          status: "approved",
-          userId,
-        }
+      await axios.put(
+        `http://localhost:3000/product/approveTransfer/${transfer._id}`,
+        { status: "approved", userId }
       );
 
       alert("Transfer approved successfully");
@@ -48,6 +52,20 @@ function ApproveTransfer() {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Approve Transfer Requests</h1>
+
+      <div className={styles.filters}>
+        <label>
+          Start Date:
+          <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+        </label>
+        <label>
+          End Date:
+          <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+        </label>
+        <button onClick={fetchAllTransferHistories} className={styles.button}>
+          Filter
+        </button>
+      </div>
 
       <table className={styles.table}>
         <thead>

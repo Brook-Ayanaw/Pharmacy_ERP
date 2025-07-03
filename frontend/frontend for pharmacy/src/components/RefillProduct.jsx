@@ -78,10 +78,8 @@ function RefillProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "https://pharmacy-erp.onrender.com/RefillBrandProduct",
-        formData
-      );
+      await axios.post("https://pharmacy-erp.onrender.com/product/RefillBrandProduct", formData);
+
 
       setMessage(res.data.message);
 

@@ -29,6 +29,7 @@ const damegedSchema = new mongoose.Schema(
     }, 
     { timestamps: true }
 );
+damegedSchema.index({ fromStore: 1, createdAt: 1 }); // For listing damage reports by store and date
 
 const DamagedProducts = mongoose.model('DamagedProducts', damegedSchema);
 module.exports = DamagedProducts;

@@ -34,6 +34,12 @@ const productSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
+productSchema.index({ store: 1, brand: 1 }); // 🔥 Optimizes /byStoreAndBrand
+productSchema.index({ brand: 1 });           // Optimizes /productsbybrand
+productSchema.index({ store: 1, name: 1 });   // Optimizes transfer logic
+productSchema.index({ expiry_date: 1 });      // Optimizes shortExpiring & expired
+productSchema.index({ purchase_invoice: 1 }); // Optimizes /allByInvoice
+productSchema.index({ store: 1, quantity: 1 }); // Optimizes /productsByAppointedStores
 
 
 const Product = mongoose.model('Product', productSchema);

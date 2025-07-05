@@ -59,10 +59,11 @@ CreditSaleHistorySchema.pre('save', function (next) {
   }
   next();
 });
-
+CreditSaleHistorySchema.index({ fromStore: 1, createdAt: -1 });     // 🔥 for store + date range queries
+CreditSaleHistorySchema.index({ createdAt: -1 });                   // For general sorting
+CreditSaleHistorySchema.index({ creditCustomer: 1 });
 const CreditSaleHistory = mongoose.model(
   'CreditSaleHistory',
   CreditSaleHistorySchema
 );
-
 module.exports = CreditSaleHistory;

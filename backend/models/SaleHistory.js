@@ -38,6 +38,10 @@ const SaleHistorySchema = new mongoose.Schema(
     },
     { timestamps: true }
 );
+SaleHistorySchema.index({ fromStore: 1, createdAt: -1 });
+SaleHistorySchema.index({ createdAt: -1 });
+SaleHistorySchema.index({ user: 1 });
+SaleHistorySchema.index({ product: 1 });
 
 // ✅ Ensure either `patientId` or `customerName` is provided
 SaleHistorySchema.pre('save', function (next) {

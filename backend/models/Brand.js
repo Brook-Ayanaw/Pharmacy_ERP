@@ -28,6 +28,8 @@ const brandSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
+brandSchema.index({ store: 1 }); // For per-store brand listings
+brandSchema.index({ name: 1, store: 1 }); // For checking if brand exists in receiver store during transfer
 
 
 const Brand = mongoose.model('Brand', brandSchema);

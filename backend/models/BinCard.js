@@ -72,6 +72,8 @@ const binCardSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+binCardSchema.index({ store: 1 });                 // ⚡ For /brandsByStore
+binCardSchema.index({ store: 1, brand: 1 });       // ⚡ For /byStoreAndBrand
 
 const BinCard = mongoose.model('BinCard', binCardSchema);
 module.exports = BinCard;

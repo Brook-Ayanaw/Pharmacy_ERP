@@ -59,6 +59,8 @@ transferHistorySchema.pre("save", async function (next) {
         next(error);
     }
 });
+transferHistorySchema.index({ senderStore: 1, receiverStore: 1, createdAt: 1 }); // For transfer reports
+//transferHistorySchema.index({ product: 1 }); // Optional, if filtering transfers per product
 
 const TransferHistory = mongoose.model('TransferHistory', transferHistorySchema);
 module.exports = TransferHistory;

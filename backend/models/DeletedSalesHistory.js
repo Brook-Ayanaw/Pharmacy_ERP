@@ -38,6 +38,8 @@ const deletedSaleHistorySchema = new mongoose.Schema(
     }, 
     { timestamps: true }
 );
+deletedSaleHistorySchema.index({ fromStore: 1, originalSaleDate: -1 });
+deletedSaleHistorySchema.index({ originalSaleDate: -1 });
 
 const DeletedSalesHistory = mongoose.model('DeletedSalesHistory', deletedSaleHistorySchema);
 module.exports = DeletedSalesHistory;

@@ -10,6 +10,8 @@ function ExpiringProducts() {
   const [selectedStore, setSelectedStore] = useState(null);
   const [months, setMonths] = useState(2);
   const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     fetchStores();
@@ -34,6 +36,8 @@ function ExpiringProducts() {
   };
 
   const fetchData = async (monthRange) => {
+    setLoading(true);
+    setError("");
     try {
       const response = await axios.get(
         "https://pharmacy-erp.onrender.com/product/shortExpiringWithMonth",
@@ -41,10 +45,18 @@ function ExpiringProducts() {
           params: { month: monthRange },
         }
       );
+
+      if (!response.data || response.data.length === 0) {
+        throw new Error("404: No expiring products found");
+      }
+
       setProducts(response.data);
     } catch (error) {
-      console.error(error);
-      //alert("Failed to load expiring products.");
+      const message = error.response?.data?.error || error.message || "Failed to load products.";
+      setError(`❌ ${message}`);
+      setProducts([]); // clear old results
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -152,7 +164,11 @@ function ExpiringProducts() {
       </div>
 
       <div id="printSection">
-        {filtered.length === 0 ? (
+        {loading ? (
+          <p className={styles.loading}>🔄 Loading products...</p>
+        ) : error ? (
+          <p className={styles.error}>{error}</p>
+        ) : filtered.length === 0 ? (
           <p className={styles.noData}>No matching expiring products found.</p>
         ) : (
           <table className={styles.table}>

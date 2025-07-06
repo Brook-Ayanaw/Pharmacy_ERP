@@ -72,4 +72,16 @@
   .select {
     min-width: 200px;
   }
+.loading {
+  text-align: center;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.error {
+  text-align: center;
+  font-weight: bold;
+  color: red;
+}
+
   

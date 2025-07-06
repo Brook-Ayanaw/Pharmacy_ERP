@@ -36,29 +36,33 @@ function ExpiringProducts() {
   };
 
   const fetchData = async (monthRange) => {
-    setLoading(true);
-    setError("");
-    try {
-      const response = await axios.get(
-        "https://pharmacy-erp.onrender.com/product/shortExpiringWithMonth",
-        {
-          params: { month: monthRange },
-        }
-      );
-
-      if (!response.data || response.data.length === 0) {
-        throw new Error("404: No expiring products found");
+  setLoading(true);
+  setError("");
+  try {
+    const response = await axios.get(
+      "https://pharmacy-erp.onrender.com/product/shortExpiringWithMonth",
+      {
+        params: { month: monthRange },
       }
+    );
 
-      setProducts(response.data);
-    } catch (error) {
-      const message = error.response?.data?.error || error.message || "Failed to load products.";
+    setProducts(response.data); // valid data
+  } catch (error) {
+    const status = error.response?.status;
+    const message =
+      error.response?.data?.message || "Failed to fetch expiring products.";
+
+    if (status === 404) {
       setError(`❌ ${message}`);
-      setProducts([]); // clear old results
-    } finally {
-      setLoading(false);
+      setProducts([]); // clear old data
+    } else {
+      setError(`❌ Server Error: ${message}`);
     }
-  };
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const applyFilters = () => {
     let result = [...products];
